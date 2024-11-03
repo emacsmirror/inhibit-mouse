@@ -1,4 +1,4 @@
-;;; inhibit-mouse.el --- Deactivate mouse input during editing in Emacs.  -*- lexical-binding: t; -*-
+;;; inhibit-mouse.el --- Deactivate mouse input during editing -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024 James Cherti | https://www.jamescherti.com/contact/
 
