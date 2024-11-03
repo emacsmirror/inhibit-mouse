@@ -35,6 +35,32 @@
           :tag "Github"
           "https://github.com/jamescherti/inhibit-mouse.el"))
 
+(defconst inhibit-mouse-multipliers '("double" "triple"))
+(defconst inhibit-mouse-button-numbers '(1 2 3 4 5 6 7 8 9 10))
+(defconst inhibit-mouse-button-events
+  '("mouse" "up-mouse" "down-mouse" "drag-mouse"))
+(defvar inhibit-mouse-wheel-events
+  '("wheel-up" "wheel-down" "wheel-left" "wheel-right"))
+
+(defun inhibit-mouse--suppress-input-event (modifier base)
+  "Suppress a specific input event in Emacs.
+
+This function disables an input event defined by the combination of
+MODIFIER and BASE. It modifies the `input-decode-map` to ensure that
+the specified event is not processed, effectively preventing any
+action associated with it.
+
+MODIFIER: The modifier key (e.g., control, meta) to be used in conjunction
+          with BASE.
+BASE: The base input event (e.g., mouse-1, wheel-up) to be suppressed.
+
+This function is useful for disabling unwanted mouse events during
+editing or other operations in Emacs, allowing users to maintain
+focus on keyboard input without interruption from mouse actions."
+  (define-key input-decode-map
+              (vector (event-convert-list (list modifier base)))
+              (lambda (_prompt) [])))
+
 ;;;###autoload
 (define-minor-mode inhibit-mouse-mode
   "Toggle `inhibit-mouse-mode'."
@@ -42,7 +68,18 @@
   :lighter " inhibit-mouse"
   :group 'inhibit-mouse
   (if inhibit-mouse-mode
-      t
+      (progn
+        (dolist (modifier '(control meta nil))
+          (dolist (base inhibit-mouse-wheel-events)
+            (inhibit-mouse--suppress-input-event modifier (intern base))))
+
+        ;; Disable mouse button events with modifiers
+        (dolist (modifier '(control meta nil))
+          (dolist (button inhibit-mouse-button-numbers)
+            (dolist (event inhibit-mouse-button-events)
+              (let ((base (format "%s-%d" event button)))
+                (inhibit-mouse--suppress-input-event modifier (intern base)))))))
+    ;; TODO Implement disable
     t))
 
 (provide 'inhibit-mouse)
