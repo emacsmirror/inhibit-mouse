@@ -32,11 +32,11 @@ To install the `inhibit-mouse` using `straight.el`:
 
 ### What is the difference with the `disable-mouse` package on MELPA?
 
-The `inhibit-mouse` package is a simpler and more efficient alternative to the `disable-mouse` package, as it modifies `input-decode-map` to disable mouse events with a single configuration.
+The *inhibit-mouse* package is a simpler and more efficient alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
 
-In contrast, `disable-mouse` applies mouse events to its own mode, and sometimes the user has to apply it to other modes that are not affected by the `disable-mouse` mode (e.g, evil-mode).
+In contrast, *disable-mouse* applies mouse events to its own mode, and sometimes the user has to apply it to other modes that are not affected by the *disable-mouse* mode (e.g, evil-mode).
 
-Additionally, `inhibit-mouse` allows re-enabling the mouse when the mode is disabled, which is not supported by `disable-mouse`.
+Additionally, *inhibit-mouse* allows re-enabling the mouse when the mode is disabled, which is not supported by *disable-mouse*.
 
 ## Author and License
 
