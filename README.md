@@ -3,11 +3,11 @@
 ![License](https://img.shields.io/github/license/jamescherti/inhibit-mouse.el)
 ![](https://raw.githubusercontent.com/jamescherti/inhibit-mouse.el/main/.images/made-for-gnu-emacs.svg)
 
-The inhibit-mouse package allows deactivating mouse input during editing in Emacs.
+The `inhibit-mouse` package allows deactivating mouse input during editing in Emacs.
 
-This package is a simpler and more efficient alternative to the `disable-mouse` package, as it only modifies `input-decode-map` to disable mouse events with a single configuration. In contrast, `disable-mouse` applies mouse events to its own mode and sometimes to other modes, such as Evil.
+The concept of using `input-decode-map` was introduced by Stefan Monnier, who proposed his solution for disabling mouse input in an emacs-devel discussion. This discussion was initiated by Daniel Radetsky, who suggested a C patch to address the issue of mouse functionality in Emacs.
 
-The concept of using `input-decode-map` was introduced by Stefan Monnier, who proposed an intuitive solution for disabling mouse input in Emacs. This discussion was initiated by Daniel Radetsky, who suggested a C patch to address the issue of mouse functionality in Emacs.
+(This package is a simpler and more efficient alternative to the `disable-mouse` package, as it only modifies `input-decode-map` to disable mouse events with a single configuration. In contrast, `disable-mouse` applies mouse events to its own mode, and sometimes the user has to apply it to other modes that are not affected by the `disable-mouse` mode.)
 
 ## Installation
 
