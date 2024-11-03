@@ -30,7 +30,7 @@ To install the `inhibit-mouse` using `straight.el`:
 
 # Frequently Asked Question
 
-### What is the difference with the `disable-mouse` package on MELPA?
+### What is the difference between the disable-mouse and inhibit-mouse packages?
 
 The *inhibit-mouse* package is a simpler and faster alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
 
