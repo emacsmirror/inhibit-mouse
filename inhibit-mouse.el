@@ -42,6 +42,9 @@
 (defvar inhibit-mouse-wheel-events
   '("wheel-up" "wheel-down" "wheel-left" "wheel-right"))
 
+(defvar inhibit-mouse--ignored-events nil
+  "The mouse events that have been ignored.")
+
 (defun inhibit-mouse--suppress-input-event (modifier base)
   "Suppress a specific input event in Emacs.
 
@@ -52,7 +55,7 @@ action associated with it.
 
 MODIFIER: The modifier key (e.g., control, meta) to be used in conjunction
           with BASE.
-BASE: The base input event (e.g., mouse-1, wheel-up) to be suppressed.
+BASE: The base input event (e.g., wheel-up) to be suppressed.
 
 This function is useful for disabling unwanted mouse events during
 editing or other operations in Emacs, allowing users to maintain
@@ -61,26 +64,38 @@ focus on keyboard input without interruption from mouse actions."
               (vector (event-convert-list (list modifier base)))
               (lambda (_prompt) [])))
 
+(defun inhibit-mouse--restore-input-event (modifier base)
+  "Restore the input event defined by MODIFIER and BASE."
+  (define-key input-decode-map
+              (vector (event-convert-list (list modifier base)))
+              nil))
+
 ;;;###autoload
 (define-minor-mode inhibit-mouse-mode
   "Toggle `inhibit-mouse-mode'."
   :global t
-  :lighter " inhibit-mouse"
+  :lighter " InhibitMouse"
   :group 'inhibit-mouse
   (if inhibit-mouse-mode
       (progn
+        (setq inhibit-mouse--ignored-events nil)
         (dolist (modifier '(control meta nil))
           (dolist (base inhibit-mouse-wheel-events)
-            (inhibit-mouse--suppress-input-event modifier (intern base))))
+            (push (cons modifier base) inhibit-mouse--ignored-events)
+            (inhibit-mouse--suppress-input-event modifier (intern base)))
 
-        ;; Disable mouse button events with modifiers
-        (dolist (modifier '(control meta nil))
           (dolist (button inhibit-mouse-button-numbers)
             (dolist (event inhibit-mouse-button-events)
               (let ((base (format "%s-%d" event button)))
+                (push (cons modifier base) inhibit-mouse--ignored-events)
                 (inhibit-mouse--suppress-input-event modifier (intern base)))))))
-    ;; TODO Implement disable mouse
-    t))
+    ;; Remove the ignored events when disabling the mode
+    (dolist (ignored-event inhibit-mouse--ignored-events)
+      (let ((modifier (car ignored-event))
+            (base (cdr ignored-event)))
+        (inhibit-mouse--restore-input-event modifier (intern base))))
+    ;; Clear the list after restoring
+    (setq inhibit-mouse--ignored-events nil)))
 
 (provide 'inhibit-mouse)
 ;;; inhibit-mouse.el ends here
