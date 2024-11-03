@@ -35,6 +35,11 @@
           :tag "Github"
           "https://github.com/jamescherti/inhibit-mouse.el"))
 
+(defcustom inhibit-mouse-mode-lighter " InhibitMouse"
+  "Mode-line lighter for `inhibit-mouse-mode'."
+  :group 'inhibit-mouse
+  :type 'string)
+
 (defconst inhibit-mouse-multipliers '("double" "triple"))
 (defconst inhibit-mouse-button-numbers '(1 2 3 4 5 6 7 8 9 10))
 (defconst inhibit-mouse-button-events
@@ -72,7 +77,7 @@ interruption from mouse actions."
 (define-minor-mode inhibit-mouse-mode
   "Toggle `inhibit-mouse-mode'."
   :global t
-  :lighter " InhibitMouse"
+  :lighter inhibit-mouse-mode-lighter
   :group 'inhibit-mouse
   (if inhibit-mouse-mode
       (progn
