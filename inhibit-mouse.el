@@ -46,20 +46,18 @@
   "The mouse events that have been ignored.")
 
 (defun inhibit-mouse--suppress-input-event (modifier base)
-  "Suppress a specific input event in Emacs.
+  "Suppress a specific input event.
 
 This function disables an input event defined by the combination of
 MODIFIER and BASE. It modifies the `input-decode-map` to ensure that
-the specified event is not processed, effectively preventing any
-action associated with it.
+the specified event is not processed.
 
-MODIFIER: The modifier key (e.g., control, meta) to be used in conjunction
-          with BASE.
+MODIFIER: The modifier key (e.g., control, meta).
 BASE: The base input event (e.g., wheel-up) to be suppressed.
 
-This function is useful for disabling unwanted mouse events during
-editing or other operations in Emacs, allowing users to maintain
-focus on keyboard input without interruption from mouse actions."
+This function is useful for disabling unwanted mouse events during editing or
+other operations, allowing users to maintain focus on keyboard input without
+interruption from mouse actions."
   (define-key input-decode-map
               (vector (event-convert-list (list modifier base)))
               (lambda (_prompt) [])))
