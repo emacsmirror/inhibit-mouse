@@ -38,6 +38,14 @@ In contrast, *disable-mouse* applies mouse events to its own mode, and sometimes
 
 Additionally, *inhibit-mouse* allows re-enabling the mouse when the mode is disabled, which is not supported by *disable-mouse*.
 
+### What motivates the author to disable the mouse in Emacs?
+
+The author disables the mouse in Emacs:
+- To prevent accidental clicks or cursor movements that can change the cursor position unexpectedly.
+- To reinforce a keyboard-centric workflow, helping to avoid the habit of relying on the mouse for navigation.
+
+Some may suggest that the author could modify the touchpad settings at the OS level. However, he prefers not to disable the touchpad entirely, as it remains useful in other applications, such as web browsers.
+
 ## Author and License
 
 The `inhibit-mouse` Emacs package has been written by [James Cherti](https://www.jamescherti.com/) and is distributed under terms of the GNU General Public License version 3, or, at your choice, any later version.
