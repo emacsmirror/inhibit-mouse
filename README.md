@@ -5,7 +5,7 @@
 
 The `inhibit-mouse` package allows deactivating mouse input during editing in Emacs.
 
-The concept of using `input-decode-map` was introduced by Stefan Monnier, who proposed his solution for disabling mouse input in an emacs-devel discussion. This discussion was initiated by Daniel Radetsky, who suggested a C patch to address the issue of mouse functionality in Emacs.
+The concept of using `input-decode-map` was introduced by Stefan Monnier in the emacs-devel mailing list ([here](https://lists.gnu.org/archive/html/emacs-devel/2024-11/msg00027.html)), who proposed his solution for disabling mouse input in an emacs-devel discussion. This discussion was initiated by Daniel Radetsky, who suggested a C patch to address the issue of mouse functionality in Emacs.
 
 ## Installation
 
