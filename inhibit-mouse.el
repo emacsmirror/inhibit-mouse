@@ -43,7 +43,7 @@
 (defconst inhibit-mouse-multipliers '("double" "triple"))
 (defvar inhibit-mouse-misc-events
   '("wheel-up" "wheel-down" "wheel-left" "wheel-right" "pinch"))
-(defconst inhibit-mouse-button-numbers '(1 2 3 4 5 6 7 8 9 10))
+(defconst inhibit-mouse-button-numbers '(1 2 3 4 5 6 7))
 (defconst inhibit-mouse-button-events
   '("mouse" "up-mouse" "down-mouse" "drag-mouse"))
 
