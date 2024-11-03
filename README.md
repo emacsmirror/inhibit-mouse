@@ -5,7 +5,7 @@
 
 The **inhibit-mouse** package allows disabling mouse input in Emacs.
 
-Instead of modifying the keymap of its own mode (as the *disable-mouse* package does), enabling `inhibit-mouse-mode` only modifies `input-decode-map` to disable mouse events, making it simpler and more efficient. Additionally, the *inhibit-mouse* package allows for the restoration of mouse input when `inhibit-mouse-mode` is disabled.
+Instead of modifying the keymap of its own mode (as the *disable-mouse* package does), enabling `inhibit-mouse-mode` only modifies `input-decode-map` to disable mouse events, making it simpler and faster. Additionally, the *inhibit-mouse* package allows for the restoration of mouse input when `inhibit-mouse-mode` is disabled.
 
 This concept of utilizing `input-decode-map` to disable the mouse was introduced by Stefan Monnier in an emacs-devel mailing list [thread](https://lists.gnu.org/archive/html/emacs-devel/2024-11/msg00013.html) initiated by Daniel Radetsky, who proposed a C patch that allows disabling the mouse.
 
@@ -32,7 +32,7 @@ To install the `inhibit-mouse` using `straight.el`:
 
 ### What is the difference with the `disable-mouse` package on MELPA?
 
-The *inhibit-mouse* package is a simpler and more efficient alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
+The *inhibit-mouse* package is a simpler and faster alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
 
 In contrast, *disable-mouse* applies mouse events to its own mode, and sometimes the user has to apply it to other modes that are not affected by the *disable-mouse* mode (e.g, evil-mode).
 
