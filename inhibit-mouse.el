@@ -79,7 +79,7 @@ focus on keyboard input without interruption from mouse actions."
             (dolist (event inhibit-mouse-button-events)
               (let ((base (format "%s-%d" event button)))
                 (inhibit-mouse--suppress-input-event modifier (intern base)))))))
-    ;; TODO Implement disable
+    ;; TODO Implement disable mouse
     t))
 
 (provide 'inhibit-mouse)
