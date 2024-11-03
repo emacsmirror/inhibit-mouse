@@ -22,6 +22,18 @@ To install the `inhibit-mouse` using `straight.el`:
              :repo "jamescherti/inhibit-mouse.el"))
 ```
 
+## Frequently Asked Questions
+
+### Where did the idea of using input-decode-map originate?
+
+The concept of using `input-decode-map` was introduced by Stefan Monnier, who proposed an intuitive solution for disabling mouse input in Emacs. This discussion was initiated by Daniel Radetsky, who suggested a C patch to address the issue of mouse functionality in Emacs.
+
+### What is the difference between the input-decode-map approach and the disable-mouse package available on MELPA?
+
+The `disable-mouse` package creates a mode that overrides mouse clicks. However, that mode does not override all other modes; some modes still require `disable-mouse` to apply key bindings manually (e.g., Evil mode).
+
+In contrast, `inhibit-mouse` is simpler and more efficient. It modifies `input-decode-map` to disable mouse events with a single configuration.
+
 ## Author and License
 
 The `inhibit-mouse` Emacs package has been written by [James Cherti](https://www.jamescherti.com/) and is distributed under terms of the GNU General Public License version 3, or, at your choice, any later version.
