@@ -40,6 +40,13 @@
   :group 'inhibit-mouse
   :type 'string)
 
+(defconst inhibit-mouse-key-modifiers '((control)
+                                        (meta)
+                                        (shift)
+                                        (control meta shift)
+                                        (control meta)
+                                        (control shift)
+                                        (meta shift)))
 (defconst inhibit-mouse-multipliers '("double" "triple"))
 (defvar inhibit-mouse-misc-events
   '("wheel-up" "wheel-down" "wheel-left" "wheel-right" "pinch"))
@@ -80,14 +87,7 @@ keyboard input without interruption from mouse actions."
       (progn
         (setq inhibit-mouse--ignored-events nil)
 
-        (dolist (modifiers '((control)
-                             (meta)
-                             (shift)
-                             (control meta shift)
-                             (control meta)
-                             (control shift)
-                             (meta shift)
-                             nil))
+        (dolist (modifiers (append (list nil) inhibit-mouse-key-modifiers))
           (dolist (base inhibit-mouse-misc-events)
             (push (cons modifiers (intern base))
                   inhibit-mouse--ignored-events)
