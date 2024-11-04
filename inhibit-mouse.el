@@ -50,28 +50,25 @@
 (defvar inhibit-mouse--ignored-events nil
   "The mouse events that have been ignored.")
 
-(defun inhibit-mouse--suppress-input-event (modifier base)
+(defun inhibit-mouse--define-input-event (modifiers base value)
   "Suppress a specific input event.
 
 This function disables an input event defined by the combination of
-MODIFIER and BASE. It modifies the `input-decode-map` to ensure that
-the specified event is not processed.
+MODIFIERS and BASE, modifying the `input-decode-map` to ensure that
+the specified event is not processed or is remapped to a specified VALUE.
 
-MODIFIER: The modifier key (e.g., control, meta).
+MODIFIERS: A list of modifier keys as symbols (e.g., (control meta)).
 BASE: The base input event (e.g., wheel-up) to be suppressed.
+VALUE: The value to associate with the suppressed input event, which can
+       be nil to ignore the event or another function or command to remap it.
 
-This function is useful for disabling unwanted mouse events during editing or
-other operations, allowing users to maintain focus on keyboard input without
-interruption from mouse actions."
+The function is useful for disabling or remapping unwanted mouse events
+during editing or other operations, allowing users to maintain focus on
+keyboard input without interruption from mouse actions."
+  (push (cons modifiers base) inhibit-mouse--ignored-events)
   (define-key input-decode-map
-              (vector (event-convert-list (list modifier base)))
-              (lambda (_prompt) [])))
-
-(defun inhibit-mouse--restore-input-event (modifier base)
-  "Restore the input event defined by MODIFIER and BASE."
-  (define-key input-decode-map
-              (vector (event-convert-list (list modifier base)))
-              nil))
+              (vector (event-convert-list (append modifiers (list base))))
+              value))
 
 ;;;###autoload
 (define-minor-mode inhibit-mouse-mode
@@ -80,23 +77,44 @@ interruption from mouse actions."
   :lighter inhibit-mouse-mode-lighter
   :group 'inhibit-mouse
   (if inhibit-mouse-mode
+      ;; ENABLE: inhibit-mouse-mode
       (progn
         (setq inhibit-mouse--ignored-events nil)
-        (dolist (modifier '(control meta nil))
-          (dolist (base inhibit-mouse-misc-events)
-            (push (cons modifier base) inhibit-mouse--ignored-events)
-            (inhibit-mouse--suppress-input-event modifier (intern base)))
 
-          (dolist (button inhibit-mouse-button-numbers)
-            (dolist (event inhibit-mouse-button-events)
-              (let ((base (format "%s-%d" event button)))
-                (push (cons modifier base) inhibit-mouse--ignored-events)
-                (inhibit-mouse--suppress-input-event modifier (intern base)))))))
+        (dolist (list-modifiers '((control)
+                                  (meta)
+                                  (shift)
+                                  (control meta shift)
+                                  (control meta)
+                                  (control shift)
+                                  (meta shift)
+                                  nil))
+          (dolist (base inhibit-mouse-misc-events)
+            (inhibit-mouse--define-input-event list-modifiers
+                                               (intern base)
+                                               (lambda (_prompt) [])))
+
+          (dolist (multiplier (cons nil inhibit-mouse-multipliers))
+            (dolist (button inhibit-mouse-button-numbers)
+              (dolist (event inhibit-mouse-button-events)
+                (let ((base (format "%s%s-%d"
+                                    (if multiplier
+                                        (concat multiplier "-")
+                                      "")
+                                    event
+                                    button)))
+                  ;; Add event to ignored list
+                  (inhibit-mouse--define-input-event
+                   list-modifiers
+                   (intern base)
+                   (lambda (_prompt) []))))))))
+    ;; DISABLE: inhibit-mouse-mode
     ;; Remove the ignored events when disabling the mode
     (dolist (ignored-event inhibit-mouse--ignored-events)
       (let ((modifier (car ignored-event))
             (base (cdr ignored-event)))
-        (inhibit-mouse--restore-input-event modifier (intern base))))
+        (inhibit-mouse--define-input-event modifier base nil)))
+
     ;; Clear the list after restoring
     (setq inhibit-mouse--ignored-events nil)))
 
