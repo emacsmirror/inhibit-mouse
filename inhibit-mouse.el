@@ -48,19 +48,36 @@
   :group 'inhibit-mouse
   :type 'string)
 
-(defvar inhibit-mouse-key-modifiers '((control)
-                                      (meta)
-                                      (shift)
-                                      (control meta shift)
-                                      (control meta)
-                                      (control shift)
-                                      (meta shift)))
-(defvar inhibit-mouse-multipliers '("double" "triple"))
-(defvar inhibit-mouse-misc-events
-  '("wheel-up" "wheel-down" "wheel-left" "wheel-right" "pinch"))
 (defvar inhibit-mouse-button-numbers '(1 2 3 4 5 6 7 8))
+
 (defvar inhibit-mouse-button-events
-  '("mouse" "up-mouse" "down-mouse" "drag-mouse"))
+  '("mouse"
+    "up-mouse"
+    "down-mouse"
+    "drag-mouse")
+  "List of mouse button events to be inhibited.")
+
+(defvar inhibit-mouse-misc-events
+  '("wheel-up"
+    "wheel-down"
+    "wheel-left"
+    "wheel-right"
+    "pinch")
+  "List of miscellaneous mouse events to be inhibited.")
+
+(defvar inhibit-mouse-multipliers
+  '("double" "triple")
+  "List of mouse multiplier events to be inhibited.")
+
+(defvar inhibit-mouse-key-modifiers
+  '((control)
+    (meta)
+    (shift)
+    (control meta shift)
+    (control meta)
+    (control shift)
+    (meta shift))
+  "List of key modifier combinations to be inhibited for mouse events.")
 
 (defvar inhibit-mouse--ignored-events nil
   "The mouse events that have been ignored.")
