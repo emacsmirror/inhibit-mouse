@@ -63,7 +63,6 @@ BASE: The base input event (e.g., wheel-up) to be suppressed.
 This function is useful for disabling unwanted mouse events during editing or
 other operations, allowing users to maintain focus on keyboard input without
 interruption from mouse actions."
-  (push (cons modifier base) inhibit-mouse--ignored-events)
   (define-key input-decode-map
               (vector (event-convert-list (list modifier base)))
               (lambda (_prompt) [])))
@@ -85,11 +84,13 @@ interruption from mouse actions."
         (setq inhibit-mouse--ignored-events nil)
         (dolist (modifier '(control meta nil))
           (dolist (base inhibit-mouse-misc-events)
+            (push (cons modifier base) inhibit-mouse--ignored-events)
             (inhibit-mouse--suppress-input-event modifier (intern base)))
 
           (dolist (button inhibit-mouse-button-numbers)
             (dolist (event inhibit-mouse-button-events)
               (let ((base (format "%s-%d" event button)))
+                (push (cons modifier base) inhibit-mouse--ignored-events)
                 (inhibit-mouse--suppress-input-event modifier (intern base)))))))
     ;; Remove the ignored events when disabling the mode
     (dolist (ignored-event inhibit-mouse--ignored-events)
