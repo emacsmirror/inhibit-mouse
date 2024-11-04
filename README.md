@@ -15,7 +15,7 @@ This concept of utilizing `input-decode-map` to disable the mouse was introduced
 
 ### Install using straight
 
-To install the `inhibit-mouse` using `straight.el`:
+To install `inhibit-mouse` using `straight.el`:
 
 1. It if hasn't already been done, [add the straight.el bootstrap code](https://github.com/radian-software/straight.el?tab=readme-ov-file#getting-started) to your init file.
 2. Add the following code to the Emacs init file:
