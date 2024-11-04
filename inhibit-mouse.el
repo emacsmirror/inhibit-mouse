@@ -72,6 +72,8 @@ VALUE: The value to associate with the suppressed input event, which can
 The function is useful for disabling or remapping unwanted mouse events
 during editing or other operations, allowing users to maintain focus on
 keyboard input without interruption from mouse actions."
+  (when value
+    (push (cons modifiers base) inhibit-mouse--ignored-events))
   (define-key input-decode-map
               (vector (event-convert-list (append modifiers (list base))))
               value))
@@ -89,8 +91,6 @@ keyboard input without interruption from mouse actions."
 
         (dolist (modifiers (append (list nil) inhibit-mouse-key-modifiers))
           (dolist (base inhibit-mouse-misc-events)
-            (push (cons modifiers (intern base))
-                  inhibit-mouse--ignored-events)
             (inhibit-mouse--define-input-event modifiers
                                                (intern base)
                                                (lambda (_prompt) [])))
@@ -104,8 +104,6 @@ keyboard input without interruption from mouse actions."
                                       "")
                                     event
                                     button)))
-                  (push (cons modifiers (intern base))
-                        inhibit-mouse--ignored-events)
                   ;; Add event to ignored list
                   (inhibit-mouse--define-input-event
                    modifiers
