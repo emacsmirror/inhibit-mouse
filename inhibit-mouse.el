@@ -129,16 +129,15 @@ keyboard input without interruption from mouse actions."
                                       "")
                                     event
                                     button)))
-                  ;; Add event to ignored list
                   (inhibit-mouse--define-input-event
                    modifiers
                    (intern base)
                    (lambda (_prompt) []))))))))
     ;; DISABLE: inhibit-mouse-mode
-    ;; Remove the ignored events when disabling the mode
     (dolist (ignored-event inhibit-mouse--ignored-events)
       (let ((modifier (car ignored-event))
             (base (cdr ignored-event)))
+        ;; Remove the ignored events when disabling the mode
         (inhibit-mouse--define-input-event modifier base nil)))
 
     ;; Clear the list after restoring
