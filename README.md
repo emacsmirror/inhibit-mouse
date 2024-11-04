@@ -38,6 +38,10 @@ In contrast, *disable-mouse* applies mouse events to its own mode, and sometimes
 
 Additionally, *inhibit-mouse* allows re-enabling the mouse when the mode is disabled, which is not supported by *disable-mouse*.
 
+### Is there an alternative package that utilizes `input-decode-map`?
+
+Daniel Radetsky, the person who sent an email to emacs-devel about disabling the mouse, developed a [similar package](https://github.com/dradetsky/ignore-mouse) that deactivates the mouse using `input-decode-map`. Coincidentally, we had the same idea at about the same time after reading Stefan Monnier's email.
+
 ### What motivates the author to disable the mouse in Emacs?
 
 The author disables the mouse in Emacs:
@@ -45,10 +49,6 @@ The author disables the mouse in Emacs:
 - To reinforce a keyboard-centric workflow, helping to avoid the habit of relying on the mouse for navigation.
 
 Some may suggest that the author could modify the touchpad settings at the OS level. However, he prefers not to disable the touchpad entirely, as it remains useful in other applications, such as web browsers.
-
-### Is there an alternative package that utilizes `input-decode-map`?
-
-Daniel Radetsky, the original poster, developed a similar package that deactivates the mouse using `input-decode-map`. Coincidentally, we had the same idea at about the same time. You can find his package [here](https://github.com/dradetsky/ignore-mouse).
 
 ## Author and License
 
