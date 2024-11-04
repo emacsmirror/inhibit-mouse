@@ -65,7 +65,6 @@ VALUE: The value to associate with the suppressed input event, which can
 The function is useful for disabling or remapping unwanted mouse events
 during editing or other operations, allowing users to maintain focus on
 keyboard input without interruption from mouse actions."
-  (push (cons modifiers base) inhibit-mouse--ignored-events)
   (define-key input-decode-map
               (vector (event-convert-list (append modifiers (list base))))
               value))
@@ -81,16 +80,18 @@ keyboard input without interruption from mouse actions."
       (progn
         (setq inhibit-mouse--ignored-events nil)
 
-        (dolist (list-modifiers '((control)
-                                  (meta)
-                                  (shift)
-                                  (control meta shift)
-                                  (control meta)
-                                  (control shift)
-                                  (meta shift)
-                                  nil))
+        (dolist (modifiers '((control)
+                             (meta)
+                             (shift)
+                             (control meta shift)
+                             (control meta)
+                             (control shift)
+                             (meta shift)
+                             nil))
           (dolist (base inhibit-mouse-misc-events)
-            (inhibit-mouse--define-input-event list-modifiers
+            (push (cons modifiers (intern base))
+                  inhibit-mouse--ignored-events)
+            (inhibit-mouse--define-input-event modifiers
                                                (intern base)
                                                (lambda (_prompt) [])))
 
@@ -103,9 +104,11 @@ keyboard input without interruption from mouse actions."
                                       "")
                                     event
                                     button)))
+                  (push (cons modifiers (intern base))
+                        inhibit-mouse--ignored-events)
                   ;; Add event to ignored list
                   (inhibit-mouse--define-input-event
-                   list-modifiers
+                   modifiers
                    (intern base)
                    (lambda (_prompt) []))))))))
     ;; DISABLE: inhibit-mouse-mode
