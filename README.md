@@ -1,11 +1,12 @@
 # inhibit-mouse.el - Deactivate mouse input in Emacs
+[![MELPA](https://melpa.org/packages/outline-indent-badge.svg)](https://melpa.org/#/inhibit-mouse)
 ![Build Status](https://github.com/jamescherti/inhibit-mouse.el/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jamescherti/inhibit-mouse.el)
 ![](https://raw.githubusercontent.com/jamescherti/inhibit-mouse.el/main/.images/made-for-gnu-emacs.svg)
 
 The **inhibit-mouse** package allows the disabling of mouse input in Emacs using `inhibit-mouse-mode`.
 
-Instead of modifying the keymap of its own mode (as the *disable-mouse* package does), enabling `inhibit-mouse-mode` only modifies `input-decode-map` to disable mouse events, making it simpler and faster than *disable-mouse*.
+Instead of modifying the keymap of its own mode as the disable-mouse package does, enabling inhibit-mouse-mode only modifies input-decode-map to disable mouse events, making it more efficient and faster than disable-mouse.
 
 Additionally, the *inhibit-mouse* package allows for the restoration of mouse input when `inhibit-mouse-mode` is disabled.
 
@@ -17,15 +18,11 @@ This concept of utilizing `input-decode-map` to disable the mouse was introduced
 
 To install `inhibit-mouse` using `straight.el`:
 
-1. It if hasn't already been done, [add the straight.el bootstrap code](https://github.com/radian-software/straight.el?tab=readme-ov-file#getting-started) to your init file.
+1. If you haven't already done so, [add MELPA repository to your Emacs configuration](https://melpa.org/#/getting-started).
 2. Add the following code to the Emacs init file:
 ```emacs-lisp
 (use-package inhibit-mouse
   :ensure t
-  :straight (inhibit-mouse
-             :type git
-             :host github
-             :repo "jamescherti/inhibit-mouse.el")
   :config
   (inhibit-mouse-mode))
 ```
@@ -63,6 +60,7 @@ This program is free software: you can redistribute it and/or modify it under th
 ## Links
 
 - [inhibit-mouse.el @GitHub](https://github.com/jamescherti/inhibit-mouse.el)
+- [inhibit-mouse.el @MELPA](https://melpa.org/#/inhibit-mouse)
 
 Other Emacs packages by the same author:
 - [minimal-emacs.d](https://github.com/jamescherti/minimal-emacs.d): This repository hosts a minimal Emacs configuration designed to serve as a foundation for your vanilla Emacs setup and provide a solid base for an enhanced Emacs experience.
