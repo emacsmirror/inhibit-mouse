@@ -33,9 +33,9 @@ To install `inhibit-mouse` using `straight.el`:
 
 The *inhibit-mouse* package is a simpler and faster alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
 
-In contrast, *disable-mouse* applies mouse events to its own mode, and sometimes the user has to apply it to other modes that are not affected by the *disable-mouse* mode (e.g, evil-mode).
+In contrast, *disable-mouse* applies mouse events to its own mode, and sometimes the user has to apply it to other modes that are not affected by the *disable-mouse* mode using the `disable-mouse-in-keymap` function (e.g, evil-mode, tab-bar...).
 
-Additionally, *inhibit-mouse* allows re-enabling the mouse when the mode is disabled, which is not supported by *disable-mouse*.
+Additionally, *inhibit-mouse* allows re-enabling the mouse when the mode is disabled, which is not supported by *disable-mouse* when the `disable-mouse-in-keymap` function is used.
 
 ### Is there an alternative package that utilizes input-decode-map?
 
