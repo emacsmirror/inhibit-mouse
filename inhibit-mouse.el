@@ -80,7 +80,7 @@
   "List of key modifier combinations to be inhibited for mouse events.")
 
 (defvar inhibit-mouse--ignored-events nil
-  "The mouse events that have been ignored.")
+  "The mouse events that have been ignored. This is an internal variable.")
 
 (defun inhibit-mouse--define-input-event (modifiers base value)
   "Suppress a specific input event.
