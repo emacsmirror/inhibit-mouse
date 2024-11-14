@@ -14,9 +14,7 @@ This concept of utilizing `input-decode-map` to disable the mouse was introduced
 
 ## Installation
 
-### Install using straight
-
-To install `inhibit-mouse` using `straight.el`:
+To install `outline-indent` from MELPA:
 
 1. If you haven't already done so, [add MELPA repository to your Emacs configuration](https://melpa.org/#/getting-started).
 2. Add the following code to the Emacs init file:
