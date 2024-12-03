@@ -32,6 +32,23 @@
 ;;
 ;; Additionally, the inhibit-mouse package allows for the restoration of mouse
 ;; input when inhibit-mouse-mode is disabled.
+;;
+;; Installation from MELPA:
+;; ------------------------
+;; (use-package inhibit-mouse
+;;   :ensure t
+;;   :config
+;;   (inhibit-mouse-mode))
+;;
+;; Usage:
+;; ------
+;; You can enable or disable inhibit-mouse-mode using:
+;;   (inhibit-mouse-mode)
+;;
+;; Links:
+;; ------
+;; - inhibit-mouse.el @GitHub:
+;;   https://github.com/jamescherti/inhibit-mouse.el
 
 ;;; Code:
 
