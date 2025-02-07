@@ -31,7 +31,7 @@ To install `outline-indent` from MELPA:
 
 Here are a few options to explore:
 
-```
+```elisp
 ;; Prevent clickable text (e.g., links) from being highlighted when the mouse hovers over it
 (setq mouse-highlight nil)
 
