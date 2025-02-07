@@ -39,14 +39,11 @@ To ensure clickable text (e.g., URLs, hyperlinks, etc.) is highlighted only when
 
 ### How to prevent help from being displayed when hovering over items?
 
-To prevent help from being displayed when hovering over items, the following code ensures that help is only shown when inhibit-mouse-mode is inactive:
+To prevent help from being displayed when hovering over items (e.g., tooltips), the following code ensures that help is only shown when inhibit-mouse-mode is inactive:
 
 ```elisp
-(add-hook 'inhibit-mouse-mode-hook
-          #'(lambda()
-              ;; Enable or disable help display when hovering over items
-              ;; depending on whether `inhibit-mouse-mode` is active
-              (setq show-help-function (not (bound-and-true-p inhibit-mouse-mode)))))
+;; Disable help display when hovering over items
+(setq show-help-function nil)
 ```
 
 ### What is the difference between the disable-mouse and inhibit-mouse packages?
