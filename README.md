@@ -25,16 +25,19 @@ To install `outline-indent` from MELPA:
 
 # Frequently Asked Question
 
-### What are some interesting Emacs customizations to consider alongside inhibit-mouse?
+### How to prevent clickable text and help from being displayed when hovering over items?
 
 Here are a few options to explore:
 
 ```elisp
-;; Prevent clickable text (e.g., links) from being highlighted when the mouse hovers over it
-(setq mouse-highlight nil)
+(add-hook 'inhibit-mouse-mode-hook
+          #'(lambda()
+              ;; Prevent clickable text (e.g., links) from being highlighted
+              ;; when the mouse hovers over it
+              (setq mouse-highlight inhibit-mouse-mode)
 
-;; Disable help display when hovering over items
-(setq show-help-function nil)
+              ;; Disable help display when hovering over items
+              (setq show-help-function inhibit-mouse-mode)))
 ```
 
 ### What is the difference between the disable-mouse and inhibit-mouse packages?
