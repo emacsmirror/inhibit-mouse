@@ -46,6 +46,24 @@ To prevent help from being displayed when hovering over items (e.g., tooltips), 
 (setq show-help-function nil)
 ```
 
+### How to enable/disable context menu?
+
+To enable or disable the context menu based on the state of `inhibit-mouse-mode`, the following code dynamically toggles `context-menu-mode` accordingly:
+
+```elisp
+(add-hook 'inhibit-mouse-mode-hook
+          #'(lambda()
+              ;; Enable or disable the context menu based on the state of
+              ;; `inhibit-mouse-mode', the following code dynamically toggles
+              ;; `context-menu-mode' accordingly.
+              (when (fboundp 'context-menu-mode)
+                (if (bound-and-true-p inhibit-mouse-mode)
+                    (context-menu-mode -1)
+                  (context-menu-mode 1)))))
+```
+
+This ensures that the context menu is disabled when `inhibit-mouse-mode` is active and enabled when it is inactive.
+
 ### What is the difference between the disable-mouse and inhibit-mouse packages?
 
 The *inhibit-mouse* package is a simpler and faster alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
