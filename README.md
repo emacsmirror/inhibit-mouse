@@ -25,18 +25,6 @@ To install `outline-indent` from MELPA:
 
 # Frequently Asked Question
 
-### How to prevent clickable text from being highlighted?
-
-To ensure clickable text (e.g., URLs, hyperlinks, etc.) is highlighted only when `inhibit-mouse-mode` is inactive, the following code dynamically adjusts the `mouse-highlight` variable based on the mode:
-
-```elisp
-(add-hook 'inhibit-mouse-mode-hook
-          #'(lambda()
-              ;; Enable or disable highlighting of clickable text based on
-              ;; whether `inhibit-mouse-mode` is active
-              (setq mouse-highlight (not (bound-and-true-p inhibit-mouse-mode)))))
-```
-
 ### How to prevent help from being displayed when hovering over items?
 
 To prevent help from being displayed when hovering over items (e.g., tooltips), the following code ensures that help is only shown when inhibit-mouse-mode is inactive:
@@ -46,25 +34,7 @@ To prevent help from being displayed when hovering over items (e.g., tooltips), 
 (setq show-help-function nil)
 ```
 
-### How to enable/disable context menu?
-
-To enable or disable the context menu based on the state of `inhibit-mouse-mode`, the following code dynamically toggles `context-menu-mode` accordingly:
-
-```elisp
-(add-hook 'inhibit-mouse-mode-hook
-          #'(lambda()
-              ;; Enable or disable the context menu based on the state of
-              ;; `inhibit-mouse-mode', the following code dynamically toggles
-              ;; `context-menu-mode' accordingly.
-              (when (fboundp 'context-menu-mode)
-                (if (bound-and-true-p inhibit-mouse-mode)
-                    (context-menu-mode -1)
-                  (context-menu-mode 1)))))
-```
-
-This ensures that the context menu is disabled when `inhibit-mouse-mode` is active and enabled when it is inactive.
-
-### How to the mouse buttons that are disabled by inhibit-mouse?
+### How to customize the mouse buttons disabled by inhibit-mouse?
 
 The inhibit-mouse custom variables allow you to fine-tune which mouse interactions are disabled.
 
@@ -108,6 +78,24 @@ Default value:
 ``` emacs-lisp
 (setq inhibit-mouse-adjust-mouse-highlight t)
 ```
+
+### How to enable/disable context menu?
+
+To enable or disable the context menu based on the state of `inhibit-mouse-mode`, the following code dynamically toggles `context-menu-mode` accordingly:
+
+```elisp
+(add-hook 'inhibit-mouse-mode-hook
+          #'(lambda()
+              ;; Enable or disable the context menu based on the state of
+              ;; `inhibit-mouse-mode', the following code dynamically toggles
+              ;; `context-menu-mode' accordingly.
+              (when (fboundp 'context-menu-mode)
+                (if (bound-and-true-p inhibit-mouse-mode)
+                    (context-menu-mode -1)
+                  (context-menu-mode 1)))))
+```
+
+This ensures that the context menu is disabled when `inhibit-mouse-mode` is active and enabled when it is inactive.
 
 ### What motivates the author to disable the mouse in Emacs?
 
