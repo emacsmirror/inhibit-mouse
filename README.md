@@ -20,7 +20,7 @@ To install `outline-indent` from MELPA:
 (use-package inhibit-mouse
   :ensure t
   :config
-  (inhibit-mouse-mode))
+  (inhibit-mouse-mode 1))
 ```
 
 # Frequently Asked Question
@@ -64,6 +64,14 @@ To enable or disable the context menu based on the state of `inhibit-mouse-mode`
 
 This ensures that the context menu is disabled when `inhibit-mouse-mode` is active and enabled when it is inactive.
 
+### What motivates the author to disable the mouse in Emacs?
+
+The author disables the mouse in Emacs:
+- To prevent accidental clicks or cursor movements that can change the cursor position unexpectedly.
+- To reinforce a keyboard-centric workflow, helping to avoid the habit of relying on the mouse for navigation.
+
+Some may suggest that the author could modify the touchpad settings at the OS level. However, he prefers not to disable the touchpad entirely, as it remains useful in other applications, such as web browsers.
+
 ### What is the difference between the disable-mouse and inhibit-mouse packages?
 
 The *inhibit-mouse* package is a efficient alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
@@ -75,14 +83,6 @@ Additionally, *inhibit-mouse*:
 - It resolves issues that disable-mouse does not, such as the "C-c C-x <mouse-wheel-down> is not bound" problem, where the user intended to enter C-c C-x j but accidentally touched the touchpad.
 
 This concept of utilizing `input-decode-map` to disable the mouse was introduced by Stefan Monnier in an emacs-devel mailing list [thread](https://lists.gnu.org/archive/html/emacs-devel/2024-11/msg00013.html) initiated by Daniel Radetsky, who proposed a patch to the Emacs developers. Additionally, here is an interesting discussion on GitHub: [Add recipe for inhibit-mouse](https://github.com/melpa/melpa/pull/9229).
-
-### What motivates the author to disable the mouse in Emacs?
-
-The author disables the mouse in Emacs:
-- To prevent accidental clicks or cursor movements that can change the cursor position unexpectedly.
-- To reinforce a keyboard-centric workflow, helping to avoid the habit of relying on the mouse for navigation.
-
-Some may suggest that the author could modify the touchpad settings at the OS level. However, he prefers not to disable the touchpad entirely, as it remains useful in other applications, such as web browsers.
 
 ## Author and License
 
