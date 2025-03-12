@@ -79,7 +79,7 @@ Default value:
 (setq inhibit-mouse-adjust-mouse-highlight t)
 ```
 
-### Enabling/Disabling the context menu?
+### Enabling/Disabling the context menu
 
 To enable or disable the context menu based on the state of `inhibit-mouse-mode`, the following code dynamically toggles `context-menu-mode` accordingly:
 
