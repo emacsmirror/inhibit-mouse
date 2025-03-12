@@ -65,28 +65,37 @@
   :group 'inhibit-mouse
   :type 'string)
 
-(defvar inhibit-mouse-button-numbers '(1 2 3 4 5 6 7 8))
+(defcustom inhibit-mouse-button-numbers '(1 2 3 4 5 6 7 8)
+  "List of mouse button numbers to inhibit."
+  :type '(repeat integer)
+  :group 'inhibit-mouse)
 
-(defvar inhibit-mouse-button-events
+(defcustom inhibit-mouse-button-events
   '("mouse"
     "up-mouse"
     "down-mouse"
     "drag-mouse")
-  "List of mouse button events to be inhibited.")
+  "List of mouse button events to be inhibited."
+  :type '(repeat string)
+  :group 'inhibit-mouse)
 
-(defvar inhibit-mouse-misc-events
+(defcustom inhibit-mouse-misc-events
   '("wheel-up"
     "wheel-down"
     "wheel-left"
     "wheel-right"
     "pinch")
-  "List of miscellaneous mouse events to be inhibited.")
+  "List of miscellaneous mouse events to be inhibited."
+  :type '(repeat string)
+  :group 'inhibit-mouse)
 
-(defvar inhibit-mouse-multipliers
+(defcustom inhibit-mouse-multipliers
   '("double" "triple")
-  "List of mouse multiplier events to be inhibited.")
+  "List of mouse multiplier events to be inhibited."
+  :type '(repeat string)
+  :group 'inhibit-mouse)
 
-(defvar inhibit-mouse-key-modifiers
+(defcustom inhibit-mouse-key-modifiers
   '((control)
     (meta)
     (shift)
@@ -94,7 +103,9 @@
     (control meta)
     (control shift)
     (meta shift))
-  "List of key modifier combinations to be inhibited for mouse events.")
+  "List of key modifier combinations to be inhibited for mouse events."
+  :type '(repeat (set (const control) (const meta) (const shift)))
+  :group 'inhibit-mouse)
 
 (defvar inhibit-mouse--ignored-events nil
   "The mouse events that have been ignored. This is an internal variable.")
