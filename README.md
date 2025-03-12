@@ -23,20 +23,20 @@ To install `outline-indent` from MELPA:
   (inhibit-mouse-mode 1))
 ```
 
-# Frequently Asked Question
+## Customization
 
-### How to prevent help from being displayed when hovering over items?
+### Preventing help from being displayed when hovering over items?
 
-To prevent help from being displayed when hovering over items (e.g., tooltips), the following code ensures that help is only shown when inhibit-mouse-mode is inactive:
+To prevent help from being displayed when hovering over items (e.g., tooltips):
 
 ```elisp
 ;; Disable help display when hovering over items
 (setq show-help-function nil)
 ```
 
-### How to customize the mouse buttons disabled by inhibit-mouse?
+### Customizing the mouse buttons disabled by inhibit-mouse?
 
-The inhibit-mouse custom variables allow you to fine-tune which mouse interactions are disabled.
+The *inhibit-mouse* custom variables allow you to fine-tune which mouse interactions are disabled.
 
 You can use the following configuration to specify which mouse buttons and events you want to disable:
 ``` emacs-lisp
@@ -70,7 +70,7 @@ You can use the following configuration to specify which mouse buttons and event
                                     (meta shift)))
 ```
 
-### Disabling Mouse Highlighting Over Clickable Text
+### Disabling mouse highlighting over clickable text (e.g., URLs, hyperlinks, etc.)
 
 The `inhibit-mouse-adjust-mouse-highlight` variable controls whether clickable text, such as URLs or hyperlinks, is highlighted when the mouse hovers over them. By default, it is set to t (enabled), but you can disable it by setting the variable to nil.
 
@@ -79,7 +79,7 @@ Default value:
 (setq inhibit-mouse-adjust-mouse-highlight t)
 ```
 
-### How to enable/disable context menu?
+### Enabling/Disabling the context menu?
 
 To enable or disable the context menu based on the state of `inhibit-mouse-mode`, the following code dynamically toggles `context-menu-mode` accordingly:
 
@@ -97,6 +97,7 @@ To enable or disable the context menu based on the state of `inhibit-mouse-mode`
 
 This ensures that the context menu is disabled when `inhibit-mouse-mode` is active and enabled when it is inactive.
 
+## Frequently Asked Question
 ### What motivates the author to disable the mouse in Emacs?
 
 The author disables the mouse in Emacs:
