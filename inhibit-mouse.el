@@ -1,4 +1,4 @@
-;;; inhibit-mouse.el --- Deactivate mouse input during editing -*- lexical-binding: t; -*-
+;;; inhibit-mouse.el --- Deactivate mouse input (alternative to disable-mouse) -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024-2025 James Cherti | https://www.jamescherti.com/contact/
 
