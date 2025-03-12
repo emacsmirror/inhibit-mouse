@@ -117,6 +117,18 @@ This variable dynamically adjusts the `mouse-highlight'."
   :type 'boolean
   :group 'inhibit-mouse)
 
+(defcustom inhibit-mouse-predicate nil
+  "Function to determine whether a mouse event should be ignored.
+It takes three arguments: (modifiers, base, value) and returns:
+- t if the mouse event should be ignored,
+- nil if the mouse event should not be ignored,
+- A function that takes one argument and returns a vector to assign to the mouse
+event instead of the default `inhibit-mouse--default-mouse-event'. For more
+details, refer to the `input-decode-map' documentation."
+  :group 'inhibit-mouse
+  :type '(choice (const nil)
+                 (function)))
+
 (defvar inhibit-mouse--ignored-events nil
   "The mouse events that have been ignored. This is an internal variable.")
 
@@ -135,11 +147,22 @@ VALUE: The value to associate with the suppressed input event, which can
 The function is useful for disabling or remapping unwanted mouse events
 during editing or other operations, allowing users to maintain focus on
 keyboard input without interruption from mouse actions."
-  (when value
-    (push (cons modifiers base) inhibit-mouse--ignored-events))
-  (define-key input-decode-map
-              (vector (event-convert-list (append modifiers (list base))))
-              value))
+  (let ((predicate-result
+         (or (not inhibit-mouse-predicate)
+             (funcall inhibit-mouse-predicate modifiers base value))))
+    (when predicate-result
+      (when (functionp predicate-result)
+        (setq value predicate-result))
+      (when value
+        (push (cons modifiers base) inhibit-mouse--ignored-events))
+      (define-key input-decode-map
+                  (vector (event-convert-list (append modifiers (list base))))
+                  value))))
+
+(defun inhibit-mouse--default-mouse-event (_arg)
+  "Return a vector for a default mouse event.
+Used in `input-decode-map' for disabled keys."
+  [])
 
 ;;;###autoload
 (define-minor-mode inhibit-mouse-mode
@@ -157,9 +180,10 @@ keyboard input without interruption from mouse actions."
 
         (dolist (modifiers (append (list nil) inhibit-mouse-key-modifiers))
           (dolist (base inhibit-mouse-misc-events)
-            (inhibit-mouse--define-input-event modifiers
-                                               (intern base)
-                                               (lambda (_prompt) [])))
+            (inhibit-mouse--define-input-event
+             modifiers
+             (intern base)
+             #'inhibit-mouse--default-mouse-event))
 
           (dolist (multiplier (cons nil inhibit-mouse-multipliers))
             (dolist (button inhibit-mouse-button-numbers)
@@ -173,7 +197,7 @@ keyboard input without interruption from mouse actions."
                   (inhibit-mouse--define-input-event
                    modifiers
                    (intern base)
-                   (lambda (_prompt) []))))))))
+                   #'inhibit-mouse--default-mouse-event)))))))
     ;; DISABLE: inhibit-mouse-mode
     (when inhibit-mouse-adjust-mouse-highlight
       (setq mouse-highlight t))
