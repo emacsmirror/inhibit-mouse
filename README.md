@@ -64,6 +64,51 @@ To enable or disable the context menu based on the state of `inhibit-mouse-mode`
 
 This ensures that the context menu is disabled when `inhibit-mouse-mode` is active and enabled when it is inactive.
 
+### How to the mouse buttons that are disabled by inhibit-mouse?
+
+The inhibit-mouse custom variables allow you to fine-tune which mouse interactions are disabled.
+
+You can use the following configuration to specify which mouse buttons and events you want to disable:
+``` emacs-lisp
+;; This variable specifies which mouse buttons should be inhibited from
+;; triggering events.
+(setq inhibit-mouse-button-numbers '(1 2 3 4 5))
+
+;; List of mouse button events to be inhibited.
+(setq inhibit-mouse-button-events '("mouse"
+                                    "up-mouse"
+                                    "down-mouse"
+                                    "drag-mouse"))
+
+;; List of miscellaneous mouse events to be inhibited.
+(setq inhibit-mouse-misc-events '("wheel-up"
+                                  "wheel-down"
+                                  "wheel-left"
+                                  "wheel-right"
+                                  "pinch"))
+
+;; List of mouse multiplier events to be inhibited.
+(setq inhibit-mouse-multipliers '("double" "triple"))
+
+;; List of key modifier combinations to be inhibited for mouse events.
+(setq inhibit-mouse-key-modifiers '((control)
+                                    (meta)
+                                    (shift)
+                                    (control meta shift)
+                                    (control meta)
+                                    (control shift)
+                                    (meta shift)))
+```
+
+### Disabling Mouse Highlighting Over Clickable Text
+
+The `inhibit-mouse-adjust-mouse-highlight` variable controls whether clickable text, such as URLs or hyperlinks, is highlighted when the mouse hovers over them. By default, it is set to t (enabled), but you can disable it by setting the variable to nil.
+
+Default value:
+``` emacs-lisp
+(setq inhibit-mouse-adjust-mouse-highlight t)
+```
+
 ### What motivates the author to disable the mouse in Emacs?
 
 The author disables the mouse in Emacs:
