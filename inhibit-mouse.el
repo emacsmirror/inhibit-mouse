@@ -107,6 +107,16 @@
   :type '(repeat (set (const control) (const meta) (const shift)))
   :group 'inhibit-mouse)
 
+(defcustom inhibit-mouse-adjust-mouse-highlight t
+  "Non-nil to disables mouse when hovering over clickable text.
+
+When enabled, clickable text will not be highlighted under the mouse (e.g.,
+URLs, hyperlinks, etc.).
+
+This variable dynamically adjusts the `mouse-highlight'."
+  :type 'boolean
+  :group 'inhibit-mouse)
+
 (defvar inhibit-mouse--ignored-events nil
   "The mouse events that have been ignored. This is an internal variable.")
 
@@ -140,6 +150,9 @@ keyboard input without interruption from mouse actions."
   (if inhibit-mouse-mode
       ;; ENABLE: inhibit-mouse-mode
       (progn
+        (when inhibit-mouse-adjust-mouse-highlight
+          (setq mouse-highlight nil))
+
         (setq inhibit-mouse--ignored-events nil)
 
         (dolist (modifiers (append (list nil) inhibit-mouse-key-modifiers))
@@ -162,6 +175,9 @@ keyboard input without interruption from mouse actions."
                    (intern base)
                    (lambda (_prompt) []))))))))
     ;; DISABLE: inhibit-mouse-mode
+    (when inhibit-mouse-adjust-mouse-highlight
+      (setq mouse-highlight t))
+
     (dolist (ignored-event inhibit-mouse--ignored-events)
       (let ((modifier (car ignored-event))
             (base (cdr ignored-event)))
