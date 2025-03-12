@@ -66,13 +66,15 @@ This ensures that the context menu is disabled when `inhibit-mouse-mode` is acti
 
 ### What is the difference between the disable-mouse and inhibit-mouse packages?
 
-The *inhibit-mouse* package is a simpler and faster alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
+The *inhibit-mouse* package is a more efficient alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
 
 In contrast, *disable-mouse* applies mouse events to its own mode, and sometimes the user has to apply it to other modes that are not affected by the *disable-mouse* mode using the `disable-mouse-in-keymap` function (e.g, evil-mode, tab-bar...).
 
-Additionally, *inhibit-mouse* allows re-enabling mouse functionality when the mode is disabled, which is not supported by *disable-mouse* when the `disable-mouse-in-keymap` function is used. The `disable-mouse-in-keymap` function overwrites the key mappings of other modes (e.g., evil, tab-bar), and there is no straightforward way to make `disable-mouse` restore them.
+Additionally, *inhibit-mouse*:
+- Allows re-enabling mouse functionality when the mode is disabled, which is not supported by *disable-mouse* when the `disable-mouse-in-keymap` function is used. The `disable-mouse-in-keymap` function overwrites the key mappings of other modes (e.g., evil, tab-bar), and there is no straightforward way to make `disable-mouse` restore them.
+- It resolves issues that disable-mouse does not, such as the "C-c C-x <mouse-wheel-down> is not bound" problem, where the user intended to enter C-c C-x j but accidentally touched the touchpad.
 
-This concept of utilizing `input-decode-map` to disable the mouse was introduced by Stefan Monnier in an emacs-devel mailing list [thread](https://lists.gnu.org/archive/html/emacs-devel/2024-11/msg00013.html) initiated by Daniel Radetsky, who proposed a patch to the Emacs developers.
+This concept of utilizing `input-decode-map` to disable the mouse was introduced by Stefan Monnier in an emacs-devel mailing list [thread](https://lists.gnu.org/archive/html/emacs-devel/2024-11/msg00013.html) initiated by Daniel Radetsky, who proposed a patch to the Emacs developers. Here is an interesting discussion on GitHub: "[Add recipe for inhibit-mouse](https://github.com/melpa/melpa/pull/9229)."
 
 ### What motivates the author to disable the mouse in Emacs?
 
