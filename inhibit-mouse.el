@@ -117,6 +117,14 @@ This variable dynamically adjusts the `mouse-highlight'."
   :type 'boolean
   :group 'inhibit-mouse)
 
+(defcustom inhibit-mouse-predicate nil
+  "Function to determine if a mouse event should be ignored.
+It takes three arguments: (modifiers, base, value) and returns t if the mouse
+event should be ignored."
+  :group 'inhibit-mouse
+  :type '(choice (const nil)
+                 (function)))
+
 (defvar inhibit-mouse--ignored-events nil
   "The mouse events that have been ignored. This is an internal variable.")
 
@@ -135,11 +143,13 @@ VALUE: The value to associate with the suppressed input event, which can
 The function is useful for disabling or remapping unwanted mouse events
 during editing or other operations, allowing users to maintain focus on
 keyboard input without interruption from mouse actions."
-  (when value
-    (push (cons modifiers base) inhibit-mouse--ignored-events))
-  (define-key input-decode-map
-              (vector (event-convert-list (append modifiers (list base))))
-              value))
+  (when (or (not inhibit-mouse-predicate)
+            (funcall inhibit-mouse-predicate modifiers base value))
+    (when value
+      (push (cons modifiers base) inhibit-mouse--ignored-events))
+    (define-key input-decode-map
+                (vector (event-convert-list (append modifiers (list base))))
+                value)))
 
 ;;;###autoload
 (define-minor-mode inhibit-mouse-mode
