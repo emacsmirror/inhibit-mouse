@@ -74,7 +74,7 @@ Additionally, *inhibit-mouse*:
 - Allows re-enabling mouse functionality when the mode is disabled, which is not supported by *disable-mouse* when the `disable-mouse-in-keymap` function is used. The `disable-mouse-in-keymap` function overwrites the key mappings of other modes (e.g., evil, tab-bar), and there is no straightforward way to make `disable-mouse` restore them.
 - It resolves issues that disable-mouse does not, such as the "C-c C-x <mouse-wheel-down> is not bound" problem, where the user intended to enter C-c C-x j but accidentally touched the touchpad.
 
-This concept of utilizing `input-decode-map` to disable the mouse was introduced by Stefan Monnier in an emacs-devel mailing list [thread](https://lists.gnu.org/archive/html/emacs-devel/2024-11/msg00013.html) initiated by Daniel Radetsky, who proposed a patch to the Emacs developers. Here is an interesting discussion on GitHub: "[Add recipe for inhibit-mouse](https://github.com/melpa/melpa/pull/9229)."
+This concept of utilizing `input-decode-map` to disable the mouse was introduced by Stefan Monnier in an emacs-devel mailing list [thread](https://lists.gnu.org/archive/html/emacs-devel/2024-11/msg00013.html) initiated by Daniel Radetsky, who proposed a patch to the Emacs developers. Additionally, here is an interesting discussion on GitHub: "[Add recipe for inhibit-mouse](https://github.com/melpa/melpa/pull/9229)."
 
 ### What motivates the author to disable the mouse in Emacs?
 
