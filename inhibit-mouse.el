@@ -65,7 +65,7 @@
   :group 'inhibit-mouse
   :type 'string)
 
-(defcustom inhibit-mouse-button-numbers '(1 2 3 4 5 6 7 8)
+(defcustom inhibit-mouse-button-numbers '(1 2 3 4 5)
   "List of mouse button numbers to inhibit."
   :type '(repeat integer)
   :group 'inhibit-mouse)
