@@ -66,7 +66,7 @@ This ensures that the context menu is disabled when `inhibit-mouse-mode` is acti
 
 ### What is the difference between the disable-mouse and inhibit-mouse packages?
 
-The *inhibit-mouse* package is a more efficient alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
+The *inhibit-mouse* package is a efficient alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
 
 In contrast, *disable-mouse* applies mouse events to its own mode, and sometimes the user has to apply it to other modes that are not affected by the *disable-mouse* mode using the `disable-mouse-in-keymap` function (e.g, evil-mode, tab-bar...).
 
