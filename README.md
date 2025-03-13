@@ -1,6 +1,7 @@
 # inhibit-mouse.el - Deactivate mouse input in Emacs (Alternative to disable-mouse)
-[![MELPA](https://melpa.org/packages/outline-indent-badge.svg)](https://melpa.org/#/inhibit-mouse)
 ![Build Status](https://github.com/jamescherti/inhibit-mouse.el/actions/workflows/ci.yml/badge.svg)
+[![MELPA](https://melpa.org/packages/outline-indent-badge.svg)](https://melpa.org/#/inhibit-mouse)
+[![MELPA Stable](https://stable.melpa.org/packages/inhibit-mouse-badge.svg)](https://stable.melpa.org/#/inhibit-mouse)
 ![License](https://img.shields.io/github/license/jamescherti/inhibit-mouse.el)
 ![](https://raw.githubusercontent.com/jamescherti/inhibit-mouse.el/main/.images/made-for-gnu-emacs.svg)
 
