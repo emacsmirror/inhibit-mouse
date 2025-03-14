@@ -20,8 +20,8 @@ To install `outline-indent` from MELPA:
 ```emacs-lisp
 (use-package inhibit-mouse
   :ensure t
-  :config
-  (inhibit-mouse-mode 1))
+  :commands inhibit-mouse-mode
+  :hook (after-init . inhibit-mouse-mode))
 ```
 
 ## Customization
