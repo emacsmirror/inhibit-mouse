@@ -73,15 +73,6 @@ You can use the following configuration to specify which mouse buttons and event
                                     (meta shift)))
 ```
 
-### Disabling mouse highlighting over clickable text (e.g., URLs, hyperlinks, etc.)
-
-The `inhibit-mouse-adjust-mouse-highlight` variable controls whether clickable text, such as URLs or hyperlinks, is highlighted when the mouse hovers over them. By default, it is set to t (enabled), but you can disable it by setting the variable to nil.
-
-Default value:
-``` emacs-lisp
-(setq inhibit-mouse-adjust-mouse-highlight t)
-```
-
 ### Enabling/Disabling the context menu
 
 To enable or disable the context menu based on the state of `inhibit-mouse-mode`, the following code dynamically toggles `context-menu-mode` accordingly:
@@ -120,6 +111,7 @@ The following configuration toggles `pixel-scroll-precision-mode` based on the s
 ```
 
 ## Frequently Asked Question
+
 ### What motivates the author to disable the mouse in Emacs?
 
 The author disables the mouse in Emacs:
