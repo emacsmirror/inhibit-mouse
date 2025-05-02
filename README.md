@@ -100,6 +100,25 @@ To enable or disable the context menu based on the state of `inhibit-mouse-mode`
 
 This ensures that the context menu is disabled when `inhibit-mouse-mode` is active and enabled when it is inactive.
 
+### Enabling/disabling pixel scroll precision mode
+
+The following configuration toggles `pixel-scroll-precision-mode` based on the state of `inhibit-mouse-mode`, excluding macOS Carbon environments where pixel scrolling is natively supported and does not require explicit activation.
+
+```elisp
+(add-hook 'inhibit-mouse-mode-hook
+          #'(lambda()
+              (unless (and
+                       ;; Exclude macOS Carbon environments where pixel
+                       ;; scrolling is natively supported and does not
+                       ;; require explicit activation.
+                       (eq window-system 'mac)
+                       (bound-and-true-p mac-carbon-version-string))
+                (when (fboundp 'pixel-scroll-precision-mode)
+                  (if (bound-and-true-p inhibit-mouse-mode)
+                      (pixel-scroll-precision-mode -1)
+                    (pixel-scroll-precision-mode 1))))))
+```
+
 ## Frequently Asked Question
 ### What motivates the author to disable the mouse in Emacs?
 
