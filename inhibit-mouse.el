@@ -107,21 +107,26 @@
   :type '(repeat (set (const control) (const meta) (const shift)))
   :group 'inhibit-mouse)
 
-(defcustom inhibit-mouse-adjust-mouse-highlight nil
-  "Non-nil to disables mouse when hovering over clickable text.
+(defcustom inhibit-mouse-adjust-mouse-highlight t
+  "If non-nil, disables mouse hover highlighting over clickable text.
+When this variable is set, it dynamically adjusts the `mouse-highlight'
+behavior, preventing visual feedback (highlighting) when the mouse pointer
+hovers over clickable text (e.g., URLs). This setting ensures that clickable
+text does not receive the standard hover indication.
 
-When enabled, clickable text will not be highlighted under the mouse (e.g.,
-URLs, hyperlinks, etc.).
-
-This variable dynamically adjusts the `mouse-highlight'."
+When `inhibit-mouse-mode' is disabled, the `mouse-highlight' behavior is
+reverted to its original value."
   :type 'boolean
   :group 'inhibit-mouse)
 
-(defcustom inhibit-mouse-adjust-show-help-function nil
-  "If non-nil, disables the use of tooltips (`show-help-function').
+(defcustom inhibit-mouse-adjust-show-help-function t
+  "If non-nil, disables the use of tooltips via `show-help-function'.
+This prevents contextual help tooltips or messages from being displayed in
+response to mouse interactions, effectively stopping the invocation of
+`show-help-function'.
 
-When this variable is non-nil, interactive mouse events will not
-trigger `show-help-function' to display contextual help."
+When `inhibit-mouse-mode' is disabled, the `show-help-function' behavior is
+reverted to its original value."
   :type 'boolean
   :group 'inhibit-mouse)
 
@@ -141,6 +146,7 @@ details, refer to the `input-decode-map' documentation."
   "The mouse events that have been ignored. This is an internal variable.")
 
 (defvar inhibit-mouse--backup-show-help-function nil)
+(defvar inhibit-mouse--backup-mouse-highlight nil)
 
 (defun inhibit-mouse--define-input-event (modifiers base value)
   "Suppress a specific input event.
@@ -184,6 +190,7 @@ Used in `input-decode-map' for disabled keys."
       ;; ENABLE: inhibit-mouse-mode
       (progn
         (when inhibit-mouse-adjust-mouse-highlight
+          (setq inhibit-mouse--backup-mouse-highlight mouse-highlight)
           (setq mouse-highlight nil))
 
         (when inhibit-mouse-adjust-show-help-function
@@ -214,7 +221,7 @@ Used in `input-decode-map' for disabled keys."
                    #'inhibit-mouse--default-mouse-event)))))))
     ;; DISABLE: inhibit-mouse-mode
     (when inhibit-mouse-adjust-mouse-highlight
-      (setq mouse-highlight t))
+      (setq mouse-highlight inhibit-mouse--backup-mouse-highlight))
 
     (when inhibit-mouse-adjust-show-help-function
       (setq show-help-function inhibit-mouse--backup-show-help-function))

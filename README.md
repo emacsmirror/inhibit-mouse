@@ -20,6 +20,14 @@ To install `outline-indent` from MELPA:
 ```emacs-lisp
 (use-package inhibit-mouse
   :ensure t
+  :custom
+  ;; Disable highlighting of clickable text such as URLs and hyperlinks when
+  ;; hovered by the mouse pointer.
+  (inhibit-mouse-adjust-mouse-highlight t)
+
+  ;; Disables the use of tooltips (show-help-function) during mouse events.
+  (inhibit-mouse-adjust-show-help-function t)
+
   :config
   (if (daemonp)
       (add-hook 'server-after-make-frame-hook #'inhibit-mouse-mode)
@@ -71,24 +79,6 @@ You can use the following configuration to specify which mouse buttons and event
                                     (control meta)
                                     (control shift)
                                     (meta shift)))
-```
-
-### Preventing the mouse hovering over text highlights and help tooltips
-
-The *inhibit-mouse* package provides customization options to suppress mouse-induced UI feedback in Emacs.
-
-To disable both link highlighting and help tooltips, configure:
-
-```elisp
-;; Disable highlighting of clickable text such as URLs and hyperlinks when
-;; hovered by the mouse pointer. This eliminates visual cues that indicate
-;; interactivity.
-(setq inhibit-mouse-adjust-show-help-function t)
-
-;; disables the use of tooltips (show-help-function) during mouse events. This
-;; prevents the display of contextual help tooltips or messages triggered by
-;; mouse interactions.
-(setq inhibit-mouse-adjust-mouse-highlight t)
 ```
 
 ### Enabling/Disabling the context menu
