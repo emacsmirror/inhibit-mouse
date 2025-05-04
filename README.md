@@ -36,15 +36,6 @@ To install `outline-indent` from MELPA:
 
 ## Customization
 
-### Preventing help from being displayed when hovering over items?
-
-To prevent help from being displayed when hovering over items (e.g., tooltips):
-
-```elisp
-;; Disable help display when hovering over items
-(setq show-help-function nil)
-```
-
 ### Customizing the mouse buttons disabled by inhibit-mouse?
 
 The *inhibit-mouse* custom variables allow you to fine-tune which mouse interactions are disabled.
