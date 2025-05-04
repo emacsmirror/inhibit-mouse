@@ -73,6 +73,24 @@ You can use the following configuration to specify which mouse buttons and event
                                     (meta shift)))
 ```
 
+### Preventing the mouse hovering over text highlights and help tooltips
+
+The *inhibit-mouse* package provides customization options to suppress mouse-induced UI feedback in Emacs.
+
+To disable both link highlighting and help tooltips, configure:
+
+```elisp
+;; Disable highlighting of clickable text such as URLs and hyperlinks when
+;; hovered by the mouse pointer. This eliminates visual cues that indicate
+;; interactivity.
+(setq inhibit-mouse-adjust-show-help-function t)
+
+;; disables the use of tooltips (show-help-function) during mouse events. This
+;; prevents the display of contextual help tooltips or messages triggered by
+;; mouse interactions.
+(setq inhibit-mouse-adjust-mouse-highlight t)
+```
+
 ### Enabling/Disabling the context menu
 
 To enable or disable the context menu based on the state of `inhibit-mouse-mode`, the following code dynamically toggles `context-menu-mode` accordingly:

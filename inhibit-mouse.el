@@ -107,13 +107,21 @@
   :type '(repeat (set (const control) (const meta) (const shift)))
   :group 'inhibit-mouse)
 
-(defcustom inhibit-mouse-adjust-mouse-highlight t
+(defcustom inhibit-mouse-adjust-mouse-highlight nil
   "Non-nil to disables mouse when hovering over clickable text.
 
 When enabled, clickable text will not be highlighted under the mouse (e.g.,
 URLs, hyperlinks, etc.).
 
 This variable dynamically adjusts the `mouse-highlight'."
+  :type 'boolean
+  :group 'inhibit-mouse)
+
+(defcustom inhibit-mouse-adjust-show-help-function nil
+  "If non-nil, disables the use of tooltips (`show-help-function').
+
+When this variable is non-nil, interactive mouse events will not
+trigger `show-help-function' to display contextual help."
   :type 'boolean
   :group 'inhibit-mouse)
 
@@ -131,6 +139,8 @@ details, refer to the `input-decode-map' documentation."
 
 (defvar inhibit-mouse--ignored-events nil
   "The mouse events that have been ignored. This is an internal variable.")
+
+(defvar inhibit-mouse--backup-show-help-function nil)
 
 (defun inhibit-mouse--define-input-event (modifiers base value)
   "Suppress a specific input event.
@@ -176,6 +186,10 @@ Used in `input-decode-map' for disabled keys."
         (when inhibit-mouse-adjust-mouse-highlight
           (setq mouse-highlight nil))
 
+        (when inhibit-mouse-adjust-show-help-function
+          (setq inhibit-mouse--backup-show-help-function show-help-function)
+          (setq show-help-function nil))
+
         (setq inhibit-mouse--ignored-events nil)
 
         (dolist (modifiers (append (list nil) inhibit-mouse-key-modifiers))
@@ -201,6 +215,9 @@ Used in `input-decode-map' for disabled keys."
     ;; DISABLE: inhibit-mouse-mode
     (when inhibit-mouse-adjust-mouse-highlight
       (setq mouse-highlight t))
+
+    (when inhibit-mouse-adjust-show-help-function
+      (setq show-help-function inhibit-mouse--backup-show-help-function))
 
     (dolist (ignored-event inhibit-mouse--ignored-events)
       (let ((modifier (car ignored-event))
