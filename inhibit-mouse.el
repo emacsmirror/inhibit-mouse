@@ -119,7 +119,7 @@ reverted to its original value."
   :type 'boolean
   :group 'inhibit-mouse)
 
-(defcustom inhibit-mouse-adjust-show-help-function t
+(defcustom inhibit-mouse-adjust-show-help-function nil
   "If non-nil, disables the use of tooltips via `show-help-function'.
 This prevents contextual help tooltips or messages from being displayed in
 response to mouse interactions, effectively stopping the invocation of
