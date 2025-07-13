@@ -90,6 +90,27 @@ To enable or disable the context menu based on the state of `inhibit-mouse-mode`
 
 This ensures that the context menu is disabled when `inhibit-mouse-mode` is active and enabled when it is inactive.
 
+### Enabling/Disabling tooltip-mode
+
+When `tooltip-mode` is enabled, Emacs displays certain UI hints (e.g., help text and mouse-hover messages) as native system tooltips—popup windows near the cursor, instead of in the echo area. This behavior is useful in graphical Emacs sessions.
+
+To toggle `tooltip-mode` dynamically based on the state of `inhibit-mouse-mode`, you can use the following hook:
+
+```elisp
+(add-hook 'inhibit-mouse-mode-hook
+          #'(lambda()
+              ;; Enable or disable `tooltip-mode'. When tooltip-mode is
+              ;; enabled, certain UI elements (e.g., help text, mouse-hover
+              ;; hints) will appear as native system tooltips (pop-up
+              ;; windows), rather than as echo area messages. This is useful
+              ;; in graphical Emacs sessions where tooltips can appear near
+              ;; the cursor.
+              (when (fboundp 'tooltip-mode)
+                (if (bound-and-true-p inhibit-mouse-mode)
+                    (tooltip-mode -1)
+                  (tooltip-mode 1)))))
+```
+
 ### Enabling/disabling pixel scroll precision mode
 
 The following configuration toggles `pixel-scroll-precision-mode` based on the state of `inhibit-mouse-mode`, excluding macOS Carbon environments where pixel scrolling is natively supported and does not require explicit activation.
