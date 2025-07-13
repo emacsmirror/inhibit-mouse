@@ -92,7 +92,7 @@ This ensures that the context menu is disabled when `inhibit-mouse-mode` is acti
 
 ### Enabling/Disabling tooltip-mode
 
-When `tooltip-mode` is enabled, Emacs displays certain UI hints (e.g., help text and mouse-hover messages) as native system tooltips—popup windows near the cursor, instead of in the echo area. This behavior is useful in graphical Emacs sessions.
+When `tooltip-mode` is enabled, Emacs displays certain UI hints (e.g., help text and mouse-hover messages) as popup windows near the cursor, instead of in the echo area. This behavior is useful in graphical Emacs sessions.
 
 To toggle `tooltip-mode` dynamically based on the state of `inhibit-mouse-mode`, you can use the following hook:
 
