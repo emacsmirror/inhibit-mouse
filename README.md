@@ -11,6 +11,8 @@ Instead of modifying the keymap of its own mode as the *disable-mouse* package d
 
 Additionally, the *inhibit-mouse* package allows for the restoration of mouse input when `inhibit-mouse-mode` is disabled.
 
+If this enhances your workflow, please show your support by **⭐ starring inhibit-mouse on GitHub** to help more Emacs users discover its benefits.
+
 ## Installation
 
 To install `inhibit-mouse` from MELPA:
