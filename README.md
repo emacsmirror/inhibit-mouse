@@ -3,7 +3,7 @@
 [![MELPA](https://melpa.org/packages/inhibit-mouse-badge.svg)](https://melpa.org/#/inhibit-mouse)
 [![MELPA Stable](https://stable.melpa.org/packages/inhibit-mouse-badge.svg)](https://stable.melpa.org/#/inhibit-mouse)
 ![License](https://img.shields.io/github/license/jamescherti/inhibit-mouse.el)
-![](https://raw.githubusercontent.com/jamescherti/inhibit-mouse.el/main/.images/made-for-gnu-emacs.svg)
+![](https://jamescherti.com/misc/made-for-gnu-emacs.svg)
 
 The **inhibit-mouse** package allows the disabling of mouse input in Emacs using `inhibit-mouse-mode`.
 
