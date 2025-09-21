@@ -146,7 +146,7 @@ It is not always as simple as just deciding not to touch the mouse. When transit
 
 In the author's case, he often found himself unconsciously reaching for the mouse, even though they had deliberately chosen to keep his hands on the home row. The home row, the middle row of keys on a standard keyboard layout, is where the fingers rest in the touch typing method. Keeping the hands on the home row minimizes unnecessary hand movement, preserves typing rhythm, and allows immediate access to the majority of keys. In contrast, reaching for the mouse interrupts the workflow, introduces delays, and shifts focus away from the keyboard, reducing overall efficiency.
 
-The inhibit-mouse.el package provided a practical solution. By disabling mouse input entirely, it removed the possibility of falling back on that habit. Over time, this enforced constraint trained the author to rely exclusively on the keyboard.
+The *inhibit-mouse* Emacs package provided a practical solution. By disabling mouse input entirely, it removed the possibility of falling back on that habit. Over time, this enforced constraint trained the author to rely exclusively on the keyboard.
 
 This package acted as a form of behavioral reinforcement for the author: each attempt to use the mouse proved unproductive, gradually reshaping habits until the keyboard-driven workflow became natural and automatic.
 
