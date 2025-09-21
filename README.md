@@ -140,6 +140,18 @@ The author disables the mouse in Emacs:
 
 Some may suggest that the author could modify the touchpad settings at the OS level. However, he prefers not to disable the touchpad entirely, as it remains useful in other applications, such as web browsers.
 
+### Is it not enough to simply avoid touching the mouse?
+
+It is not always as simple as just deciding not to touch the mouse. When transitioning to a fully keyboard-driven workflow, existing habits can be surprisingly persistent.
+
+In the author's case, the author often found himself unconsciously reaching for the mouse, even though they had deliberately chosen to keep their hands on the home row.
+
+(The home row refers to the middle row of keys on a standard keyboard layout, where the fingers rest in the touch typing method. Maintaining the hands on the home row is useful because it minimizes unnecessary hand movement, preserves typing rhythm, and allows immediate access to the majority of keys without repositioning. In contrast, reaching for the mouse interrupts the workflow, introduces delays, and shifts focus away from the keyboard, thereby reducing overall efficiency.)
+
+The inhibit-mouse.el package provided a practical solution to the author. By disabling mouse input entirely, it removed the possibility of falling back on that habit. Over time, this enforced constraint trained the author to rely exclusively on the keyboard.
+
+The package functioned as a form of behavioral reinforcement: every attempt to use the mouse became unproductive, gradually reshaping the author's habits until the keyboard-driven workflow felt natural and automatic.
+
 ### What is the difference between the disable-mouse and inhibit-mouse packages?
 
 The *inhibit-mouse* package is a efficient alternative to the *disable-mouse* package, as it only modifies *input-decode-map* to disable mouse events.
