@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/github/license/jamescherti/inhibit-mouse.el)
 ![](https://jamescherti.com/misc/made-for-gnu-emacs.svg)
 
-The **inhibit-mouse** package allows the disabling of mouse input in Emacs using `inhibit-mouse-mode`.
+The **[inhibit-mouse](https://github.com/jamescherti/inhibit-mouse.el)** package allows the disabling of mouse input in Emacs using `inhibit-mouse-mode`.
 
 Instead of modifying the keymap of its own mode as the *disable-mouse* package does, enabling inhibit-mouse-mode only modifies input-decode-map to disable mouse events, making it more efficient and faster than *disable-mouse*.
 
