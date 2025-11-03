@@ -182,7 +182,7 @@ Used in `input-decode-map' for disabled keys."
 
 ;;;###autoload
 (define-minor-mode inhibit-mouse-mode
-  "Toggle `inhibit-mouse-mode'."
+  "Disable all mouse input."
   :global t
   :lighter inhibit-mouse-mode-lighter
   :group 'inhibit-mouse
