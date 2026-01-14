@@ -1,6 +1,6 @@
 ;;; inhibit-mouse.el --- Deactivate mouse input (alternative to disable-mouse) -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2024-2025 James Cherti | https://www.jamescherti.com/contact/
+;; Copyright (C) 2024-2026 James Cherti | https://www.jamescherti.com/contact/
 
 ;; Author: James Cherti
 ;; Version: 1.0.2
