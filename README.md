@@ -29,6 +29,10 @@ To install `inhibit-mouse` from MELPA:
   ;; Disables the use of tooltips (show-help-function) during mouse events.
   (inhibit-mouse-adjust-show-help-function t)
 
+  ;; Allow mouse input in specific major modes (e.g., when viewing a PDF
+  ;; document or an image)
+  (inhibit-mouse-excluded-modes '(pdf-view-mode image-mode))
+
   :config
   (if (daemonp)
       (add-hook 'server-after-make-frame-hook #'inhibit-mouse-mode)
@@ -36,6 +40,16 @@ To install `inhibit-mouse` from MELPA:
 ```
 
 ## Customization
+
+### Allowing mouse in specific major modes
+
+To allow mouse input in specific major modes (e.g., when viewing a PDF document or an image), add those modes to the `inhibit-mouse-excluded-modes` list.
+
+When the mouse pointer hovers over a window containing a buffer that matches any mode in this list, mouse events will pass through completely unmodified. This allows clicking links inside a PDF or navigating an image without needing to turn off the global mode.
+
+```emacs-lisp
+(setq inhibit-mouse-excluded-modes '(pdf-view-mode image-mode))
+```
 
 ### Customizing the mouse buttons disabled by inhibit-mouse?
 

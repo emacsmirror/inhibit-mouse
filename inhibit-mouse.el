@@ -129,6 +129,13 @@ reverted to its original value."
   :type 'boolean
   :group 'inhibit-mouse)
 
+(defcustom inhibit-mouse-excluded-modes nil
+  "List of major modes where `inhibit-mouse' is disallowed.
+When the mouse interacts with a window displaying a buffer that uses one of
+these major modes, the mouse event will not be inhibited."
+  :type '(repeat symbol)
+  :group 'inhibit-mouse)
+
 (defcustom inhibit-mouse-predicate nil
   "Function to determine whether a mouse event should be ignored.
 It takes three arguments: (modifiers, base, value) and returns:
@@ -151,7 +158,7 @@ details, refer to the `input-decode-map' documentation."
   "Suppress a specific input event.
 
 This function disables an input event defined by the combination of
-MODIFIERS and BASE, modifying the `input-decode-map` to ensure that
+MODIFIERS and BASE, modifying the `input-decode-map' to ensure that
 the specified event is not processed or is remapped to a specified VALUE.
 
 MODIFIERS: A list of modifier keys as symbols (e.g., (control meta)).
@@ -176,8 +183,48 @@ keyboard input without interruption from mouse actions."
 
 (defun inhibit-mouse--default-mouse-event (_arg)
   "Return a vector for a default mouse event.
-Used in `input-decode-map' for disabled keys."
-  [])
+Used in `input-decode-map' for disabled keys.
+Dynamically checks `inhibit-mouse-excluded-modes' to pass events through
+if the mouse is hovering over an exempted major mode."
+  (if (not inhibit-mouse-excluded-modes)
+      ;; Return an empty vector [] to discard the event.
+      []
+    (let* (;; Retrieve the current position of the mouse pointer. This returns a
+           ;; data structure in the form of (FRAME X . Y).
+           (mouse-pos (mouse-position))
+
+           ;; Extract the frame from the first element of 'mouse-pos'. The frame
+           ;; is required to accurately resolve the window layout.
+           (frame (car mouse-pos))
+
+           ;; Safely extract the X and Y coordinate. 'car-safe' is used to avoid
+           ;; runtime errors if 'coords' evaluates to nil (which can happen if
+           ;; the mouse pointer is entirely outside the Emacs frame).
+           (coords (cdr mouse-pos))
+           (x (car-safe coords))
+           (y (cdr-safe coords))
+
+           ;; Identify the Emacs window located exactly at the retrieved X and Y
+           ;; coordinates. The 'and' condition prevents invoking 'window-at'
+           ;; with nil arguments.
+           (window (and x y (window-at x y frame)))
+
+           ;; Resolve the buffer currently displayed within that specific
+           ;; window. The 'and' condition ensures 'window-buffer' is only called
+           ;; on a valid window object.
+           (buffer (and window (window-buffer window)))
+
+           ;; Retrieve the 'major-mode' symbol directly from that target buffer.
+           ;; We use 'buffer-local-value' to read the variable from the target
+           ;; buffer's local environment without the overhead and side effects
+           ;; of switching buffers.
+           (mode (and buffer (buffer-local-value 'major-mode buffer))))
+      (if (memq mode inhibit-mouse-excluded-modes)
+          ;; If the resolved mode is present in 'inhibit-mouse-excluded-modes',
+          ;; return nil to allow the mouse event to pass through unmodified.
+          nil
+        ;; Otherwise, return an empty vector [] to discard the event.
+        []))))
 
 ;;;###autoload
 (define-minor-mode inhibit-mouse-mode
