@@ -44,7 +44,7 @@
 ;;   ;; Disables the use of tooltips (show-help-function) during mouse events.
 ;;   (inhibit-mouse-adjust-show-help-function t)
 ;;
-;;   :config
+;;   :init
 ;;   (if (daemonp)
 ;;       (add-hook 'server-after-make-frame-hook #'inhibit-mouse-mode)
 ;;     (inhibit-mouse-mode 1)))
