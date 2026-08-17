@@ -146,6 +146,7 @@ The following configuration toggles `pixel-scroll-precision-mode` based on the s
 ### What motivates the author to disable the mouse in Emacs?
 
 The author disables the mouse in Emacs:
+
 - To prevent accidental clicks or cursor movements that can change the cursor position unexpectedly.
 - To reinforce a keyboard-centric workflow, helping to avoid the habit of relying on the mouse for navigation.
 
@@ -168,6 +169,7 @@ The *inhibit-mouse* package is a efficient alternative to the *disable-mouse* pa
 In contrast, *disable-mouse* applies mouse events to its own mode, and sometimes the user has to apply it to other modes that are not affected by the *disable-mouse* mode using the `disable-mouse-in-keymap` function (e.g, evil-mode, tab-bar...).
 
 Additionally, *inhibit-mouse*:
+
 - Allows re-enabling mouse functionality when the mode is disabled, which is not supported by *disable-mouse* when the `disable-mouse-in-keymap` function is used. The `disable-mouse-in-keymap` function overwrites the key mappings of other modes (e.g., evil, tab-bar), and there is no straightforward way to make *disable-mouse* restore them.
 - It resolves issues that *disable-mouse* does not, such as the "C-c C-x <mouse-wheel-down> is not bound" problem, where the user intended to enter C-c C-x j but accidentally touched the touchpad.
 
@@ -187,6 +189,7 @@ This program is free software: you can redistribute it and/or modify it under th
 - [inhibit-mouse.el @MELPA](https://melpa.org/#/inhibit-mouse)
 
 Other Emacs packages by the same author:
+
 - [minimal-emacs.d](https://github.com/jamescherti/minimal-emacs.d): This repository hosts a minimal Emacs configuration designed to serve as a foundation for your vanilla Emacs setup and provide a solid base for an enhanced Emacs experience.
 - [compile-angel.el](https://github.com/jamescherti/compile-angel.el): **Speed up Emacs!** This package guarantees that all .el files are both byte-compiled and native-compiled, which significantly speeds up Emacs.
 - [outline-indent.el](https://github.com/jamescherti/outline-indent.el): An Emacs package that provides a minor mode that enables code folding and outlining based on indentation levels for various indentation-based text files, such as YAML, Python, and other indented text files.
