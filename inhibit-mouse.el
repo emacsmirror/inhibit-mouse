@@ -5,7 +5,7 @@
 ;; Author: James Cherti <https://www.jamescherti.com/contact/>
 ;; Version: 1.0.4
 ;; URL: https://github.com/jamescherti/inhibit-mouse.el
-;; Keywords: convenience
+;; Keywords: convenience, mouse
 ;; Package-Requires: ((emacs "24.1"))
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -63,7 +63,7 @@
 
 (defgroup inhibit-mouse nil
   "Non-nil if inhibit-mouse mode mode is enabled."
-  :group 'inhibit-mouse
+  :group 'mouse
   :prefix "inhibit-mouse-"
   :link '(url-link
           :tag "Github"
