@@ -131,9 +131,7 @@ reverted to its original value."
 (defcustom inhibit-mouse-adjust-show-help-function t
   "If non-nil, disables the use of tooltips via `show-help-function'.
 This prevents contextual help tooltips or messages from being displayed in
-response to mouse interactions, effectively stopping the invocation of
-`show-help-function'.
-
+response to mouse interactions, stopping the invocation of `show-help-function'.
 When `inhibit-mouse-mode' is disabled, the `show-help-function' behavior is
 reverted to its original value."
   :type 'boolean
@@ -163,6 +161,15 @@ details, refer to the `input-decode-map' documentation."
 
 (defvar inhibit-mouse--backup-show-help-function nil)
 (defvar inhibit-mouse--backup-mouse-highlight nil)
+
+(defun inhibit-mouse--enforce-show-help-function ()
+  "Ensure `show-help-function' remains disabled.
+Updates the backup variable to properly restore the state if `tooltip-mode'
+is toggled while `inhibit-mouse-mode' is active."
+  (when (and (bound-and-true-p inhibit-mouse-mode)
+             inhibit-mouse-adjust-show-help-function)
+    (setq inhibit-mouse--backup-show-help-function show-help-function)
+    (setq show-help-function nil)))
 
 (defun inhibit-mouse--define-input-event (modifiers base value)
   "Suppress a specific input event.
@@ -251,7 +258,8 @@ if the mouse is hovering over an exempted major mode."
 
         (when inhibit-mouse-adjust-show-help-function
           (setq inhibit-mouse--backup-show-help-function show-help-function)
-          (setq show-help-function nil))
+          (setq show-help-function nil)
+          (add-hook 'tooltip-mode-hook #'inhibit-mouse--enforce-show-help-function))
 
         (setq inhibit-mouse--ignored-events nil)
 
@@ -280,6 +288,7 @@ if the mouse is hovering over an exempted major mode."
       (setq mouse-highlight inhibit-mouse--backup-mouse-highlight))
 
     (when inhibit-mouse-adjust-show-help-function
+      (remove-hook 'tooltip-mode-hook #'inhibit-mouse--enforce-show-help-function)
       (setq show-help-function inhibit-mouse--backup-show-help-function))
 
     (dolist (ignored-event inhibit-mouse--ignored-events)
