@@ -3,7 +3,7 @@
 ;; Copyright (C) 2024-2026 James Cherti | https://www.jamescherti.com/contact/
 
 ;; Author: James Cherti <https://www.jamescherti.com/contact/>
-;; Version: 1.0.4
+;; Version: 1.0.5
 ;; URL: https://github.com/jamescherti/inhibit-mouse.el
 ;; Keywords: convenience, mouse
 ;; Package-Requires: ((emacs "24.1"))
